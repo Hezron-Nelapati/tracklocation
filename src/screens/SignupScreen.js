@@ -1,44 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Input, Button } from 'react-native-elements';
-import Spacer from '../components/Spacer';
+import NavLink from '../components/NavLink';
+import AuthForm from '../components/AuthForm';
 import { Context as AuthContext } from '../context/AuthContext';
 
 const SignupScreen = ({ navigation }) => {
     const { state, signup } = useContext(AuthContext);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    
+
+
     return (
-        <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'white'}}>
-            <View style={styles.containerStyle}>
-                <Text h3>Sign Up for Tracker</Text>
-                <Spacer />
-                <Spacer />
-            <Input 
-                    label="Email"
-                    value={email}
-                    onChangeText={setEmail}
-                    autoCapitalize="none"
-                    autoCorrect={false}
+        <View style={styles.signup}>
+            <AuthForm 
+                header="Sign Up"
+                errorMessage={state.errorMessage}
+                onSubmit={signup}
+           />
+            <NavLink 
+                text="Already have an account? Sign in instead"
+                routeName="Signin"
             />
-            <Input
-                    label="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-            />
-            <Spacer>
-                <Button 
-                    title="Sign Up"
-                    onPress={() => {
-                        signup({ email, password })
-                    }}
-                />
-            </Spacer>
-            </View>
         </View>
     );
 }
@@ -50,11 +30,10 @@ SignupScreen.navigationOptions = () => {
 }
 
 const styles =StyleSheet.create({
-    containerStyle: {
-        marginTop: 200,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        flex: 0.5
+    signup: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'white',
+        justifyContent: 'center'
     }
 })
 
