@@ -10,7 +10,7 @@ import TrackCreateScreen from './src/screens/TrackCreate';
 import TrackListScreen from './src/screens/TrackList';
 import TrackDetailScreen from './src/screens/TrackDetail';
 
-import { Provider as AuthProvider} from './src/context/AuthContext';
+import { Provider as AuthProvider } from './src/context/AuthContext';
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
