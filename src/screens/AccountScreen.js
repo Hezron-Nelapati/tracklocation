@@ -1,23 +1,27 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
 import { SafeAreaView } from 'react-navigation';
+import { MaterialIcons } from '@expo/vector-icons'
 
 const AccountScreen = () => {
     const { signout } = useContext(AuthContext);
     return (
         <SafeAreaView style={styles.account} forceInset={{top: 'always'}}>
-            <Text style={styles.label}>Account screen</Text>
-           <Spacer>
-                <Button 
-                    title="Sign Out"
-                    onPress={signout}
-                />
-            </Spacer>
+            <Button 
+                title="Sign Out"
+                onPress={signout}
+            />
         </SafeAreaView>
     );
+}
+
+AccountScreen.navigationOptions =() => {
+    return {
+        title: 'Account',
+        tabBarIcon: <MaterialIcons name="account-circle" size={24} color="black"/>
+    }
 }
 
 const styles =StyleSheet.create({
@@ -26,14 +30,8 @@ const styles =StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         // borderWidth: 1,
-        marginTop: 25
-    },
-    label: {
-        fontSize: 30,
-        marginHorizontal: 20,
-        fontWeight: '300',
-        top: 30,
-        position: 'absolute'
+        marginTop: 25,
+        padding: 30
     }
 })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, HeaderTitle } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import SignupScreen from './src/screens/SignupScreen';
@@ -16,6 +16,19 @@ import { Provider as TrackProvider } from './src/context/TrackContext';
 import { setNavigator } from './src/navigationRef';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 
+import { Feather } from '@expo/vector-icons'
+
+const trackListFlow =  createStackNavigator({
+  TrackList: TrackListScreen,
+  TrackDetail: TrackDetailScreen
+},{})
+
+trackListFlow.navigationOptions = () => {
+  return {
+    title: 'Tracks',
+    tabBarIcon: <Feather name='map' color='black' size={24} />
+  }
+}
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
 
@@ -25,14 +38,7 @@ const switchNavigator = createSwitchNavigator({
   },{}),
   
   mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen
-    },{
-      defaultNavigationOptions: {
-        title: 'Tracker App'
-      }
-    }),
+    trackListFlow,
     TrackCreate: TrackCreateScreen,
     Account: AccountScreen
   },{})
